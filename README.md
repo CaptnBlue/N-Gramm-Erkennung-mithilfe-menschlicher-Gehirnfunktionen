@@ -12,6 +12,8 @@ Für die Durchführung der Analyse muss im Hauptverzeichnis ein Ordner mit dem N
 
 > **Hinweis:** Der Pfad zu den Korpora muss in der Datei `RunAlgorithm.java` entsprechend angepasst werden.
 
-Die integrierte Textbereinigung ist speziell auf die Korpora abgestimmt, die unter https://www.corpusdata.org/intro.asp verfügbar sind.
+Beim Ausführen des Programms werden die enthaltenen Texte automatisch eingelesen und die N-Gramme extrahiert. Die Parameter lassen sich in der Datei `Constants.java` einstellen. Anschließend werden die Sequenztabellen des LTM und STM im Ordner ressources gespeichert.
 
-Beim Ausführen des Programms werden die enthaltenen Texte automatisch eingelesen und die N-Gramme extrahiert. Die Parameter lassen sich in der `Constants.java` einstellen. Abschließend finden sich die Sequenztabellen des LTMs und STMs im Ordner `ressources`.
+Darauf folgend kann über die Klasse CreateGraph ein Graph, wie beschrieben in der Arbeit, aufgebaut werden. Die verschiedenen Parameter befinden sich ebenfalls in der `Constants.java`. Der erzeugte Graph wird abschließend als .txt-Datei gespeichert.
+
+Um später Ausgaben zu erzeugen, muss die entsprechende Methode in der Klasse TraverseGraph aufgerufen werden. Falls ein direkter Aufruf gewünscht ist, kann der Graph-Parameter auf null gesetzt werden. Als erste Methodenvariable sollte in diesem Fall eine gewünschte Eingabesequenz angegeben werden, die im LTM enthalten ist.
