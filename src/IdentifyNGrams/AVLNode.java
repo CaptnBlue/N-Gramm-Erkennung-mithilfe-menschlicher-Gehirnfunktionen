@@ -1,3 +1,7 @@
+package IdentifyNGrams;
+
+import Shared.Constants;
+
 public class AVLNode {
 
     Sequenz seqData;

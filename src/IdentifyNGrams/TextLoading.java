@@ -1,3 +1,5 @@
+
+package IdentifyNGrams;
 //Klasse um mit pdfs zu arbeiten wird nicht mehr benötigit
 
 import java.util.ArrayList;

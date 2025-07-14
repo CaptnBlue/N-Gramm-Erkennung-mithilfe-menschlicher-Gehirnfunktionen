@@ -1,3 +1,5 @@
+package IdentifyNGrams;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import org.w3c.dom.Node;
+import Shared.Constants;
 
 public class AVLTree {
 
@@ -213,9 +215,9 @@ public class AVLTree {
         // Sortiere die Liste der Knoten nach counter absteigend
         nodeList.sort((node1, node2) -> Integer.compare(node2.seqData.getCounter(), node1.seqData.getCounter()));
         if (isLtm) {
-            filename = "resources/ltm.txt";
+            filename = "output/nods/ltm.txt";
         } else {
-            filename = "resources/stm.txt";
+            filename = "output/nods/stm.txt";
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {

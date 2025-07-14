@@ -1,3 +1,4 @@
+package IdentifyNGrams;
 //Speicehrklasse für zusammengehörige LTMs und STMs
 
 public class Memory {

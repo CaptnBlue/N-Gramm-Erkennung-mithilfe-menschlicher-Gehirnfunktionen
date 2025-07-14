@@ -1,3 +1,7 @@
+package IdentifyNGrams;
+
+import Shared.Constants;
+
 public class HeapspaceController {
     public static double maxUsage = 0.0;
 
@@ -22,7 +26,7 @@ public class HeapspaceController {
             memory.shortTermMemory.cleanStm();
 
             System.gc(); // GC manuell aufurufen um Heapspace zu leeren
-            // System.out.printf("Speicherauslastung: %.2f%%\n", usage * 100);
+            System.out.printf("Speicherauslastung: %.2f%%\n", usage * 100);
             // System.out.println("Achtung: Speicherauslastung überschreitet den
             // Schwellenwert!");
 

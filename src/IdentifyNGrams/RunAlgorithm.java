@@ -1,3 +1,6 @@
+
+package IdentifyNGrams;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -6,13 +9,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import Shared.AdjustingText;
+import Shared.Constants;
+
 public class RunAlgorithm {
     public static void start() {
+
         List<String> pdfTexte = new ArrayList<>();
 
         try {
             // Den gesamten Inhalt der Datei in einen String laden
-            String dateiPfad = "resources\\coca_all.txt"; // Pfad zur Datei
+            String dateiPfad = Constants.corpus; // Pfad zur Datei
             String inhalt = Files.readString(Paths.get(dateiPfad));
             pdfTexte.add(inhalt);
 
@@ -25,7 +32,11 @@ public class RunAlgorithm {
         List<Memory> threadsAVL = new ArrayList<>();
         for (int i = 0; i < pdfTexte.size(); i++) { // nur eine wird geladen
             List<String> inputSentences = AdjustingText.cleanSentences(pdfTexte.get(i));
-
+            System.out.println("Anzahl untersuchter Sätze:" + inputSentences.size());
+            if (Constants.AMOUNT_THREADS > inputSentences.size()) {
+                System.out.println("Fehler: Threadanzahl übersteigt Satzanzahl.");
+                System.exit(0);
+            }
             // processSentencesList(inputSentences); // Befehl für Liste statt AVL-Baum
 
             List<List<String>> partitions = partitionList(inputSentences,
@@ -49,11 +60,18 @@ public class RunAlgorithm {
                 System.out.println("Thread wurde unterbrochen: " + e.getMessage());
             }
         }
-        AVLTree.merge(threadsAVL, mainMemory);
-        AVLTree.transferSTMtoLTM(mainMemory); // Methode zum Sicherstellen dass alle ins LTM übertragen worden sind
+        if (Constants.AMOUNT_THREADS > 1) {
+            AVLTree.merge(threadsAVL, mainMemory);
+            AVLTree.transferSTMtoLTM(mainMemory); // Methode zum Sicherstellen dass alle ins LTM übertragen worden sind
 
-        mainMemory.longTermMemory.printByCounter(true); // Ausgaben in .txt
-        mainMemory.shortTermMemory.printByCounter(false);
+            mainMemory.longTermMemory.printByCounter(true); // Ausgaben in .txt
+            mainMemory.shortTermMemory.printByCounter(false);
+        } else {
+            mainMemory = threadsAVL.get(0);
+            AVLTree.transferSTMtoLTM(mainMemory); // Methode zum Sicherstellen dass alle ins LTM übertragen worden sind
+            mainMemory.longTermMemory.printByCounter(true); // Ausgaben in .txt
+            mainMemory.shortTermMemory.printByCounter(false);
+        }
 
     }
 
@@ -75,7 +93,6 @@ public class RunAlgorithm {
     private static Memory processSentences(List<String> sentences) {
         Memory memory = new Memory();
         for (String sentence : sentences) {
-            int numbersent = 0;
             List<String> nGramme = AdjustingText.generateNGramms(sentence);
             // Gehe alle nGramme durch
             for (String nGramm : nGramme) {
@@ -89,10 +106,9 @@ public class RunAlgorithm {
 
             // Speicherüberprüfung
             HeapspaceController.checkHeapUsage(memory);
-            numbersent += 1;
-            if (numbersent == 30000)
-                break;
+
         }
+        // System.out.println(sentenceCounter + " | " + memory.longTermMemory.size());
         memory.longTermMemory.updateTimeForAllNodes();
         memory.shortTermMemory.updateTimeForAllNodes();
         return memory;

@@ -1,3 +1,6 @@
+
+package IdentifyNGrams;
+
 //Basisdatenstruktur für AVL-Baum
 public class Sequenz {
 
