@@ -27,7 +27,7 @@ public class LiklihoodCheck {
         List<String> graphKeys = new ArrayList<>(graph.keySet());
         Random random = new Random();
 
-        // Map: Wortanzahl → [Anzahl generiert, Anzahl Duplikate]
+        // Map: Wortanzahl
         Map<Integer, int[]> stats = new HashMap<>();
 
         while (true) {
@@ -36,7 +36,7 @@ public class LiklihoodCheck {
             if (sent == null || sent.isBlank()) {
                 continue;
             }
-            String generated = sent; // ausgelagerte funktion war hier mal
+            String generated = sent; // ausgelagerte funktion nach traverse graph um Satzzeichen hinten anzufügen
             int wordCount = countWordsWithEnding(generated);
 
             if (wordCount > maxLength || wordCount <= 0) {
