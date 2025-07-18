@@ -56,9 +56,9 @@ public class CreateGraph {
 
         for (String sentence : inputSentences) {
             if (!Constants.WITH_PUNCTUATIONMARKS) {
-                sentence = sentence.replaceAll("[.:?!]", "");
+                sentence = sentence.replaceAll("[.?!]", "");
             } else {
-                sentence = sentence.replaceAll("([.:?!])", " $1 ");
+                sentence = sentence.replaceAll("([.?!])", " $1 ");
             }
             String[] words = sentence.split("[\\s']+");
 
@@ -173,9 +173,9 @@ public class CreateGraph {
 
         for (String sentence : inputSentences) {
             if (!Constants.WITH_PUNCTUATIONMARKS) {
-                sentence = sentence.replaceAll("[.:?!]", "");
+                sentence = sentence.replaceAll("[.?!]", "");
             } else {
-                sentence = sentence.replaceAll("([.:?!])", " $1 ");
+                sentence = sentence.replaceAll("([.?!])", " $1 ");
             }
             String[] words = sentence.split("[\\s']+");
 

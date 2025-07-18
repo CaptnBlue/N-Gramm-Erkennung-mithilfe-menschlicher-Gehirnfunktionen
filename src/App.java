@@ -4,7 +4,7 @@ import Shared.Constants;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        IdentifyNGrams.RunAlgorithm.start();
+        // IdentifyNGrams.RunAlgorithm.start();
         while (Constants.HISTORY < 3) {
             CreateGraph.buildGraph();
             LiklihoodCheck.checkProbability();

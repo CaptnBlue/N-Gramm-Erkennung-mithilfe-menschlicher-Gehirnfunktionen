@@ -23,13 +23,13 @@ public class TraverseGraph {
 
         // bereingung und splitten
         if (!Constants.WITH_PUNCTUATIONMARKS) {
-            input = input.replaceAll("[.:?!]", "");
+            input = input.replaceAll("[.?!]", "");
         } else {
-            input = input.replaceAll("([.:?!])", " $1 ");
+            input = input.replaceAll("([.?!])", " $1 ");
         }
 
         boolean isEndless = false;
-        while (!input.matches(".*[.:?!].*") && !isEndless) {
+        while (!input.matches(".*[.?!].*") && !isEndless) {
             // input = input.replaceAll("\\band\\b", "."); // and auch als mögliches
             // satzende
             if (countWordsWithEnding(input) > 100) { // abbrechen falls zu groß, wahrscheinlich endlois schleifen dann
@@ -38,7 +38,8 @@ public class TraverseGraph {
 
             input = getNextToken(input, graph);
         }
-
+        input = input.trim().replaceAll("\\s+([.!?])$", "$1"); // wichtig da sonst keine matches wen leerzeichen noch da
+                                                               // sind
         return input;
     }
 

@@ -36,7 +36,7 @@ public class LiklihoodCheck {
             if (sent == null || sent.isBlank()) {
                 continue;
             }
-            String generated = sent.trim().replaceAll("\\s+([.!?])$", "$1");
+            String generated = sent; // ausgelagerte funktion war hier mal
             int wordCount = countWordsWithEnding(generated);
 
             if (wordCount > maxLength || wordCount <= 0) {
